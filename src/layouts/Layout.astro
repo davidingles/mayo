@@ -1,0 +1,61 @@
+---
+interface Props {
+	title: string
+}
+
+const { title } = Astro.props
+---
+
+<script>
+	import { changeTheme } from '../theme/changeTheme.js'
+
+	document.addEventListener('DOMContentLoaded', function () {
+		document.querySelector('.btn').addEventListener('click', changeTheme)
+	})
+</script>
+
+<html lang='es'>
+	<head>
+		<meta charset='UTF-8' />
+		<meta
+			name='description'
+			content='Información y catálogo sobre Auxiliar Manipuladora del Cartón'
+		/>
+		<meta
+			name='viewport'
+			content='width=device-width'
+		/>
+		<link
+			rel='icon'
+			type='image/svg+xml'
+			href='/favicon.svg'
+		/>
+		<meta
+			name='generator'
+			content={Astro.generator}
+		/>
+		<title>{title}</title>
+	</head>
+	<body>
+		<button class='btn'> theme </button>
+		<slot />
+	</body>
+</html>
+<style is:global>
+	:root {
+		color-scheme: light dark;
+		color: light-dark(rgb(55, 55, 55), rgb(209, 209, 209));
+	}
+	.btn {
+		position: absolute;
+		top: 0;
+		right: 0;
+		z-index: 999;
+		cursor: pointer;
+	}
+	html {
+		font-family: system-ui, sans-serif;
+		background-color: light-dark(rgb(233, 233, 233), rgb(28, 28, 28)) #13151a;
+		background-size: 224px;
+	}
+</style>
